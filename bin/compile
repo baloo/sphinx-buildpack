@@ -212,7 +212,7 @@ SPHINX_DIR=$(dirname $(find $BUILD_DIR/. -maxdepth 3 -type f -name 'conf.py' | h
 PATH=$DITAA_PATH:$PATH make html
 
 cd $BUILD_DIR
-HTML_DIR=$(dirname $(find . -maxdepth 5 -type f -name 'index.html' | sort | head -1))
+HTML_DIR="./build/html"
 
 puts-step "Installing goldenarch"
 pip install --use-mirrors goldenarch | indent
