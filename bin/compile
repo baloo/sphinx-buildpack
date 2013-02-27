@@ -200,8 +200,11 @@ if (grep -Fiq "hg+" requirements.txt) then
 fi
 
 # Install dependencies with Pip.
-#puts-step "Installing dependencies using pip version $(pip --version | awk '{print $2}')"
-#pip install --use-mirrors -r requirements.txt --exists-action=w --src=./.heroku/src | indent
+puts-step "Installing dependencies using pip version $(pip --version | awk '{print $2}')"
+pip install oauth2==1.5.211 Flask==0.8 Flask-OpenID==1.0.1 \
+  python-openid==2.2.5 \
+  Flask-AutoIndex==0.4.1 \
+  --use-mirrors |indent
 
 puts-step "Installing Sphinx"
 pip install --use-mirrors sphinx
@@ -247,7 +250,11 @@ set-default-env PYTHONHASHSEED random
 set-default-env PYTHONHOME /app/.heroku/venv/
 set-default-env PYTHONPATH /app/
 
-set-proc web "STATIC_DIR=$HTML_DIR goldenarch"
+cp -R $ROOT_DIR/src/app $BUILD_DIR/.heroku/
+rm .heroku/app/templates
+ln -s ../../$HTML_DIR .heroku/app/templates
+
+set-proc web "cd .heroku/app && python app.py"
 
 # ### Fin.
 
