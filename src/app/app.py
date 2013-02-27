@@ -67,7 +67,7 @@ def logout():
 @requires_auth
 def autoindex(path="."):
     print path
-    if path == "/":
+    if path == ".":
        return idx.render_autoindex("/index.html")
     else:
        return idx.render_autoindex(path)
