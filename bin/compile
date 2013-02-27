@@ -208,7 +208,6 @@ pip install --use-mirrors sphinx
 puts-step "Building Sphinx"
 SPHINX_DIR=$(dirname $(find $BUILD_DIR/. -maxdepth 3 -type f -name 'conf.py' | head -1))
 
-cd $SPHINX_DIR
 make html
 
 cd $BUILD_DIR
