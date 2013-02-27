@@ -66,7 +66,10 @@ def logout():
 @app.route('/<path:path>')
 @requires_auth
 def autoindex(path="."):
-    return idx.render_autoindex(path)
+    if path == "/":
+       return idx.render_autoindex("/index.html")
+    else:
+       return idx.render_autoindex(path)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
